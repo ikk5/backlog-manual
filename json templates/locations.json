@@ -1,0 +1,6 @@
+{
+  "$schema": "https://github.com/ManualForArchipelago/Manual/raw/main/schemas/Manual.locations.schema.json",
+  "data": [
+  {"name": "Backlog beaten", "category": ["Goal"], "requires": "|McGuffin:<GOAL_ITEMS_REQUIRED>|", "victory": true}
+]
+}

@@ -1,0 +1,9 @@
+{
+  "$schema": "https://github.com/ManualForArchipelago/Manual/raw/main/schemas/Manual.game.schema.json",
+  "game": "Backlog",
+  "creator": "<PLAYER>",
+  "filler_item_name": "Motivation",
+  "starting_items": [
+    {"item_categories": ["Game"], "random": 1}
+  ]
+}
