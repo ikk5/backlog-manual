@@ -28,6 +28,7 @@ def replacePlaceholder(placeholder, replacement, filepath):
         file.write(filedata)
     file.close()
 
+# creates new output folders for a player, copies the templates there and replaces the playername in the templates
 def createInitialOutput(player_name, player_output):
     shutil.copytree("empty apworld", player_output)
 
@@ -52,11 +53,11 @@ def insertJsonLine(line_to_insert, file_path):
             file.write(line)
     file.close()
 
-def addGameToItems(title, player_output):
+def addGameToItemsJson(title, player_output):
     item = ',{"name": "'+title+' pass", "category": ["Game"], "progression": true}\n'
     insertJsonLine(item, player_output + r"/data/"+items_json)
 
-def addGameToLocations(title, player_output):
+def addGameToLocationsJson(title, player_output):
     locations = (',{"name": "'+title+' beaten reward 1", "category": ["'+title+'"], "requires": "|'+title+' pass|"}\n'
                  ',{"name": "'+title+' beaten reward 2", "category": ["'+title+'"], "requires": "|'+title+' pass|"}\n')
     insertJsonLine(locations, player_output + r"/data/"+locations_json)
@@ -72,9 +73,11 @@ def buildApworld(player_name):
     # cleanup zipped folders
     shutil.rmtree(output_file)
 
-#actual script start
+# actual script start
+# delete everything in the output folder
 clearOutput()
 player_list = os.listdir(players_path)
+# open players folder and loop through contents
 for playertxt in player_list:
     if not playertxt.startswith("template"):
         player_name = playertxt.split(".")[0].strip()
@@ -90,8 +93,8 @@ for playertxt in player_list:
             for line in file:
                 if not line.startswith("#") and not line.isspace():
                     line = line.strip().replace(":", "")
-                    addGameToItems(line, player_output)
-                    addGameToLocations(line, player_output)
+                    addGameToItemsJson(line, player_output)
+                    addGameToLocationsJson(line, player_output)
         file.close()
         buildApworld(player_name)
 
