@@ -63,7 +63,7 @@ def addGameToLocationsJson(title, player_output):
     insertJsonLine(locations, player_output + r"/data/"+locations_json)
 
 def buildApworld(player_name):
-    output_file = output_path+"manual_backlog_"+player_name
+    output_file = output_path+player_name
     # zip folder
     shutil.make_archive(output_file, "zip", output_file)
     # change zip extension to apworld
@@ -81,7 +81,7 @@ player_list = os.listdir(players_path)
 for playertxt in player_list:
     if not playertxt.startswith("template"):
         player_name = playertxt.split(".")[0].strip()
-        player_output = output_path + r"manual_backlog_" + player_name + "/" + player_name
+        player_output = output_path + player_name + "/" + player_name
         createInitialOutput(player_name, player_output)
 
         with open(players_path + playertxt) as file:
